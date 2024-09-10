@@ -1,12 +1,8 @@
 name: "Terraform Pipeline with GitHub Actions"
 
 on:
- workflow_dispatch:
  push:
-   branches:
-   - main
-   paths:
-   - ./**
+ workflow_dispatch:
 
 env:
  TF_LOG: INFO
