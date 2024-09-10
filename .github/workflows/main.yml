@@ -1,6 +1,7 @@
 name: "Terraform Pipeline with GitHub Actions"
 
 on:
+ workflow_dispatch:
  push:
    branches:
    - main
