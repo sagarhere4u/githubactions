@@ -10,6 +10,7 @@ on:
 
 env:
  TF_LOG: INFO
+ env: PRODUCTION
 
 jobs:
  terraform:
