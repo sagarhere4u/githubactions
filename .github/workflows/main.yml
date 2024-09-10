@@ -45,9 +45,9 @@ jobs:
 
      - name: Terraform plan
        id: plan
-       run: terraform plan
+       run: terraform plan -var="env=$env"
  
      - name: Terraform Apply
        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-       run: terraform apply -auto-approve
+       run: terraform apply -auto-approve -var="env=$env"
        
