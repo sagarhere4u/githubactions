@@ -1,0 +1,47 @@
+name: "Terraform Pipeline with GitHub Actions"
+
+on:
+ push:
+ workflow_dispatch:
+
+env:
+ TF_LOG: INFO
+ env: PRODUCTION
+
+jobs:
+ terraform:
+   name: "Terraform Pipeline"
+   runs-on: ubuntu-latest
+   defaults:
+     run:
+       shell: bash
+       # We keep Terraform files in the terraform directory.
+       working-directory: .
+
+   steps:
+     - name: Checkout the repository to the runner
+       uses: actions/checkout@v2
+
+     - name: Setup Terraform with specified version on the runner
+       uses: hashicorp/setup-terraform@v2
+       with:
+         terraform_version: 1.6.0
+
+     - name: Terraform init
+       id: init
+       run: terraform init
+
+     - name: Terraform format
+       id: fmt
+       run: terraform fmt -check
+
+     - name: Terraform validate
+       id: validate
+       run: terraform validate
+
+     - name: Terraform plan
+       id: plan
+       run: terraform plan -var="env=$env"
+ 
+     - name: Terraform Apply
+       run: terraform apply -auto-approve -var="env=$env"
