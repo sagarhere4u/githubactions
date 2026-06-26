@@ -6,7 +6,7 @@ on:
 
 env:
  TF_LOG: INFO
- env: PRODUCTION
+ env: UAT
 
 jobs:
  terraform:
